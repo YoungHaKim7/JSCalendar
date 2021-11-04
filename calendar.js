@@ -40,6 +40,39 @@ function getDatesBetween(date1,date2){
         firstDate = new Date(dates[i].getFullYear(),dates[i].getMonth(),1);
         content += "<div id='calendarTable_" +(i+1)+"'>";
         content += "<h2>"+firstDate.toString().split(" ")[1]+"-"+firstDate.getFullYear()+"</h2>";
+        content += "<table >";
+        content += "<thead>";
+        weekDays.map(item=>{
+            content+="<th>"+item.fullDay+"</th>";
+        });
+        content += "</thead>";
+        content += "<tbody>";
+        let j=1;
+        let displayNum, idMonth;
+        while (j<=LastDate.getDate()){
+            content += "<tr>";
+            for(let k=0; k<7; k++){
+                displayNum = j < 10 ? "0" + j: j;
+                if(j==1){
+                    if(firstDate.toString().split(" ")[0] == weekDays[k].shortDay){
+                        content += "<td>"+displayNum+"</td>";
+                        j++;
+                    }else {
+                        content += "<td></td>";
+                    }
+                }else if(j>LastDate.getDate()){
+                    content += "<td></td>";
+                }else {
+                    content += "<td>"+displayNum+"</td>";
+                    j++;
+                }
+            }
+            content += "</tr>";
+
+
+        }
+        content += "</tbody>";
+        content += "</table>";
         content += "</div>";
     }
     return content;
